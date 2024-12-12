@@ -1,13 +1,14 @@
-import type { PropsWithChildren, ReactElement } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react'; 
 import { StyleSheet, useColorScheme } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedRef,
   useAnimatedStyle,
   useScrollViewOffset,
+  SharedValue,
 } from 'react-native-reanimated';
 
-import { ThemedView } from '@/components/ThemedView';
+import { ThemedView } from '../components/ThemedView';
 
 const HEADER_HEIGHT = 250;
 
@@ -38,7 +39,7 @@ export default function ParallaxScrollView({
         {
           scale: interpolate(scrollOffset.value, [-HEADER_HEIGHT, 0, HEADER_HEIGHT], [2, 1, 1]),
         },
-      ],
+      ] as [{ translateY: number }, { scale: number }], // Explicitly typing the transform array
     };
   });
 
